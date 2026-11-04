@@ -1,0 +1,156 @@
+.burgerBtn {
+    width: 45px;
+    height: 45px;
+    background-color: #faf1db; /* Бежевый фон */
+    border: none;
+    border-radius: 50%; /* Делает круглым */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  .burgerBtn:hover {
+    background-color: #ffffff;
+    transform: scale(1.05);
+  }
+  
+  .burgerLines {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20px;
+    height: 14px;
+  }
+  
+  .burgerLines span {
+    width: 100%;
+    height: 2px;
+    background-color: #a5231c; /* Темные полоски внутри кружка */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Анимация полосок в крестик */
+  .burgerBtn.open .burgerLines span:first-child {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .burgerBtn.open .burgerLines span:nth-child(2) {
+    opacity: 0;
+  }
+  .burgerBtn.open .burgerLines span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+  
+  /* --- Затемнение фона --- */
+  .menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999; /* Чуть ниже самого меню */
+    backdrop-filter: blur(2px);
+  }
+  
+  /* --- Боковое меню --- */
+  .sideMenu {
+    position: fixed !important; /* Жестко фиксируем */
+    top: 0;
+
+    /* По умолчанию (для ПК) ширина 300px */
+    width: 300px; 
+    height: 100dvh; /* На всю высоту динамического экрана */
+    overflow-y: auto; /* Скролл, если ссылок больше, чем влезает */
+
+    /* Прячем за правый край экрана ровно на его ширину */
+    right: -300px; 
+    transition: right 0.3s ease-in-out; /* Плавный выезд */
+
+    /* width: min(300px, 100%); На мобилке на всю ширину, на ПК - 300px */
+    
+    background-color: #faf1db;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+
+    
+    z-index: 1000; /* Поверх всего */
+    padding: 80px 20px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Медиа-запрос для телефонов */
+@media (max-width: 400px) {
+  .sideMenu {
+    width: 100%; /* На телефоне занимает всю ширину */
+    right: -100%; /* Прячем за экран на 100% */
+  }
+}
+  
+  .sideMenu.open {
+    /* Выезжает на экран */
+    right: 0; 
+    /* transform: translateX(0); */
+  }
+  
+  /* Стили для списка ссылок (убираем синий цвет и подчеркивание) */
+  .sideMenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sideMenu li {
+    margin-bottom: 15px;
+  }
+  
+  .sideMenu a {
+    display: block;
+    font-size: 1rem;
+    color: #542916 !important; 
+    text-decoration: none !important; /* Убираем подчеркивание */
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  /* Подсветка активного маршрута */
+  .sideMenu a.active {
+    background-color: #a5231c;
+    color: #faf1db !important;
+    font-weight: bold;
+  }
+  
+  .sideMenu a:hover:not(.active) {
+    background-color: rgba(165, 35, 28, 0.1);
+  }
+  
+  .menuDivider {
+    height: 1px;
+    background-color: #a5231c;
+    margin: 20px 0;
+  }
+  
+  .logoutBtn, .loginBtn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: #a5231c;
+    color: #faf1db !important;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none !important;
+    font-weight: bold;
+  }
+  
+  .logoutBtn:hover, .loginBtn:hover {
+    background-color: #8a1a14;
+    color: #faf1db;
+  }
+  
+  

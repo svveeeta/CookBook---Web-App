@@ -1,4 +1,610 @@
-:root {
+/* Определяет базовое оформление страниц, карточек, ссылок и
+состояния фокуса. */
+/* Включаем предсказуемый расчёт размеров элементов. */
+*, *::before, *::after {
+  box-sizing: border-box; /* Padding не увеличивает ширину */
+}
+ html {
+  background: #faf1db;
+  scroll-behavior: smooth;
+}
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden; /* Исключает горизонтальную прокрутку */
+}
+
+ /* Задаём базовые параметры страницы и типографики. */
+body {
+  margin: 0;
+  color: #542916;
+  font-family: Arial, Helvetica, sans-serif;
+
+  margin: 0;
+  min-width: 320px; /* Учебная минимальная ширина */
+}
+
+/* Ограничиваем ширину основного содержимого и выравниваем его по
+центру. */
+/* main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+} */
+
+main {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  /* Отступы тянутся: от 16px на мобилке до 32px на десктопе */
+  padding: clamp(1rem, 4vw, 2rem) clamp(1rem, 3vw, 2rem); 
+}
+
+header
+/* section  */
+{
+  margin-bottom: 32px;
+}
+h1 {
+  margin: 40px 0;
+  font-size: clamp(30px, 7vw, 50px);
+ }
+ h2 {
+  /* margin-bottom: 16px; */
+ }
+
+ p,
+ li {
+  line-height: 1.6;
+}
+
+.eyebrow {
+  margin-bottom: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+ /* Автоматически распределяем карточки по доступным колонкам. */
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.feature-card {
+  padding: 20px;
+  border: 1px solid #d7d7d7;
+  border-radius: 12px;
+  background: #ffffff;
+}
+.feature-card h3 {
+  margin-top: 0;
+}
+.main-link {
+  display: inline-block;
+  font-weight: 700;
+  color: #134f9c;
+}
+/* Показываем заметный фокус при клавиатурной навигации. */
+.main-link:focus-visible {
+  outline: 3px solid #134f9c;
+  outline-offset: 4px;
+}
+
+/* ===== кнопка о проекте ====== */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  /* background: #787c4b; */
+  background: #a5231c;
+  color: #faf1db;
+  margin-bottom: 20px;
+}
+
+
+/* КАРТОЧКИ РЕЦЕПТОВ (НОВЫЙ) */
+/* --- Сетка --- */
+.recipes-grid {
+  display: grid !important;
+  /* grid-template-columns: repeat(3, minmax(0, 1fr)) !important;  */
+  /* grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 30px; /* расстояние между карточками */
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px auto 30px;
+  /* padding: 0 20px; */
+  justify-items: stretch;
+}
+
+/* --- Блок с чекбоксом --- */
+.recipe-select-item {
+  display: flex !important;
+  flex-direction: column;
+  width: 100% !important; /* Обязательно на всю ширину колонки */
+  gap: 12px;
+}
+
+.recipe-select-checkbox {
+  display: flex;
+  align-items: flex-start; /* Чекбокс сверху, текст рядом */
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #a5231c; /* Красный текст */
+  font-weight: 600;
+  background: transparent;
+  padding: 0;
+}
+
+.recipe-select-checkbox input {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: #a5231c; /* Красит галочку в красный */
+  cursor: pointer;
+  flex-shrink: 0; /* Запрещает чекбоксу сплющиваться */
+}
+
+/* --- Карточка --- */
+.recipe-card {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column;
+  background-color: #a5231c;
+  color: #faf1db;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgb(165, 35, 28, 0.5);
+  flex-grow: 1; /* Карточка занимает всё оставшееся место под чекбоксом */
+}
+
+/* --- Картинка --- */
+.recipe-image-wrapper {
+  position: relative;
+  width: 100% !important;
+  height: 220px !important; /* Фиксированная высота */
+  overflow: hidden;
+  display: block;
+
+  aspect-ratio: 4 / 3;
+}
+
+.recipe-image {
+  width: 100% !important; 
+  height: 100% !important; 
+  object-fit: cover !important; /* Обрезает края, не искажая */
+  display: block;
+}
+
+/* Обертка для заголовка и кнопки */
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.recipe-header h3 {
+  margin: 0; /* Убираем отступ у h3, так как он теперь во флекс-контейнере */
+}
+
+/* Кнопка-сердечко */
+.favorite-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.2);
+}
+
+.favorite-btn.active {
+  /* color: #ff4d4d; */
+  color: #a5231c;
+}
+
+/* --- Контент внутри карточки --- */
+.recipe-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.recipe-content h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.recipe-desc {
+  margin: 0 0 16px 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  flex-grow: 1; 
+  /* Обрезаем длинный текст троеточием */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.recipe-meta {
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.recipe-meta p {
+  margin: 0 0 6px 0;
+  line-height: 1.4;
+}
+
+.recipe-meta span {
+  font-weight: 700;
+}
+
+/* --- Кнопка "Подробнее" --- */
+.recipe-btn {
+  display: block !important;
+  margin-top: auto; 
+  padding: 12px 16px;
+  background-color: #faf1db;
+  color: #a5231c !important;
+  text-align: center;
+  text-decoration: none !important; /* Убираем подчеркивание */
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.recipe-btn:hover {
+  background-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* кнопка все рецепты */
+.all-recipe-btn {
+  /* display: block !important; */
+  margin-top: auto; 
+  padding: 12px 16px;
+  background-color: #a5231c;
+  color: #faf1db !important;
+  text-align: center;
+  text-decoration: none !important; /* Убираем подчеркивание */
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Картинка рецепта на отдельной странице */
+.recipe-image-str {
+  width: 500px ;
+  height: 100%; 
+  display: block;
+}
+
+.recipe-hero {
+  position: relative; /* Обязательно для fill */
+  width: 100%;
+  max-width: 800px; /* Ограничиваем ширину по центру */
+  height: 400px; /* Фиксированная высота */
+  margin: 0 0 30px; /* Центрируем и даем отступ снизу */
+  border-radius: 16px;
+  overflow: hidden; /* Обрезаем лишнее по краям */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.recipe-hero-img {
+  object-fit: cover; /* Заполняет блок, обрезая края (без искажений) */
+}
+
+/* --- Ссылка "Составить список покупок" --- */
+.shopping-selection {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  color: #333; /* Или твой цвет текста */
+}
+
+.shopping-selection p {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.shopping-selection a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #a5231c;
+  color: #faf1db !important;
+  text-decoration: none !important;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+.shopping-selection a:hover {
+  opacity: 0.9;
+}
+
+
+/* ====== меню ====== */
+.header {
+  width: 100%;
+  background-color: #542916;
+  margin-bottom: 0;
+
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  position: fixed;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
+  /* padding: 18px 32px; */
+  /* gap: 40px; */
+}
+
+
+.logo {
+  /* font-size: 26px; */
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #faf1db;
+  text-decoration: none;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  flex: 1;
+}
+
+.nav-link {
+  color: #faf1db;
+  text-decoration: none;
+  font-size: 16px;
+
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #e9d194;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-greeting {
+  font-size: 15px;
+  color: #faf1db;
+}
+
+.login-button,
+.logout-button {
+  padding: 9px 16px;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.login-button {
+  /* background-color: #92a477; */
+  background-color: #a5231c;
+  color: #faf1db;
+  text-decoration: none;
+}
+
+.login-button:hover {
+  background-color: #741611;
+}
+
+.logout-button {
+  /* border: 1px solid #a5231c; */
+  background-color: #faf1db;
+  color: #542916;
+}
+
+.logout-button:hover {
+  background-color: #e9d194;
+}
+
+
+.nav-link[aria-current="page"] {
+  color: #e9d194;
+  font-weight: 600;
+}
+
+
+/* ===== ПРЕДУПРЕЖДЕНИЕ О ДЕМОНСТРАЦИОННОМ РЕЖИМЕ ====== */
+.demo-notice {
+  width: 100%;
+  background-color: #f5e9ce;
+  border-bottom: 1px solid #d8c6a8;
+}
+
+.demo-notice-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  box-sizing: border-box;
+
+  color: #5a2d1b;
+  font-size: 14px;
+}
+
+
+/* ===== Форма входа ======*/
+.auth-form {
+  width: 100%;
+  max-width: 480px;
+
+  margin: auto;
+  padding: 40px;
+
+  /* background-color: #e9d194; */
+  border: 1px solid #e9d194;
+  /* border-radius: 16px; */
+
+  box-sizing: border-box;
+
+  box-shadow: 0 8px 25px rgba(76, 43, 27, 0.08);
+}
+
+.auth-form h2 {
+  margin: 0 0 30px;
+
+  color: #542916;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  color: #542916;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.form-field input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 13px 14px;
+
+  border: 1px solid #cdbda9;
+  
+  background-color: #ffffff;
+
+  color: #542916;
+  font-size: 16px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-field input:focus {
+  border-color: #a93226;
+
+  box-shadow: 0 0 0 3px rgba(169, 50, 38, 0.12);
+}
+
+.auth-button {
+  width: 100%;
+
+  margin-top: 8px;
+  padding: 13px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: #a5231c;
+  color: #faf1db;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.auth-button:hover {
+  background-color: #741611;
+}
+
+.auth-link {
+  margin: 22px 0 0;
+
+  text-align: center;
+
+  color: #5b4338;
+  font-size: 14px;
+}
+
+.auth-link a {
+  color: #a5231c;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
+
+.password-hint {
+  color: #806b5d;
+  font-size: 13px;
+}
+
+.form-error {
+  margin: 6px 0 0;
+  color: #a93226;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+/* 1. Ховер-эффекты только для мыши (на тач-экранах не сработает) */
+@media (hover: hover) and (pointer: fine) {
+  .recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  .burger-btn:hover {
+    background-color: #ffffff;
+  }
+}
+
+/* 2. Отключение анимаций для пользователей с вестибулярными расстройствами */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -29,6 +635,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: #e9f0fd;
+  color: #0c0e13;
 }
 
 * {
@@ -47,3 +656,11 @@ a {
     color-scheme: dark;
   }
 }
+
+section {
+  margin: 20px;
+}
+
+
+
+

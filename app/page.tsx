@@ -1,69 +1,84 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  redirect("/start");
 }
+
+
+// import RecipeCard from "./ui/RecipeCard"
+// import Link from "next/link";
+
+
+// export default function HomePage () {
+//     return (
+//         <main>
+//             <Link href="/about" className="button">
+//                 О проекте
+//             </Link>
+
+//             <h1>CookBook</h1>
+//             <h2>Веб-приложение для хранения и поиска рецептов</h2>
+
+//             <section>
+//                 <h3>Проблема</h3>
+//                 <p>
+//                     При большом количестве рецептов информация о блюдах, <br />
+//                     ингредиентах и способах приготовления может храниться в разных <br />
+//                     источниках. Из-за этого пользователю сложно быстро найти нужный <br />
+//                     рецепт и сохранить понравившиеся блюда в одном месте.
+//                 </p>
+//             </section>
+//             <section>
+//                 <h3>Целевая аудитория</h3>
+//                 <p>
+//                     Люди, которые готовят дома и хотят удобно хранить,
+//                     искать и систематизировать рецепты.
+//                 </p>
+//             </section>
+//             <section>
+//                 <h3>Основные функции</h3>
+//                 <ul>
+//                     <li>Просмотр и поиск рецептов по имеющимся ингредиентам с возможностью настройки строгости поиска.</li>
+//                     <li>Фильтрация рецептов по ситуации и времени приготовления.</li>
+//                     <li>Добавление ингредиентов выбранного рецепта в список покупок.</li>
+//                     <li>Добавление собственных рецептов.</li>
+//                     <li>Сохранение понравившихся рецептов в избранное.</li>
+//                 </ul>
+//             </section>
+//             <section >
+//                 <h3>Популярные рецепты</h3>
+            
+//                 <div className = "recipes">
+//                     <RecipeCard
+//                         id = "1"
+//                         title = "Чизкейк Нью-Йорк"
+//                         description = "Классический американский десерт, который отличается плотной, гладкой и очень нежной текстурой, напоминающей сливочный пломбир."
+//                         time = "90 минут"
+//                     />
+
+//                     <RecipeCard 
+//                         id = "2"
+//                         title = "Вишневый пирог"
+//                         description = "Классика домашней выпечки, где сочная ягода с приятной кислинкой прекрасно балансирует сладость теста."
+//                         time = "90 минут"
+//                     />
+
+//                     <RecipeCard 
+//                         id = "3"
+//                         title = "Брауни из кабачка"
+//                         description = "Шоколадный кекс, который получается сочным за счет влажности кабачка."
+//                         time = "60 минут"
+//                     />
+
+//                     <RecipeCard 
+//                         id = "4"
+//                         title = "Шарлотка"
+//                         description = "Простой яблочный пирог, где начинка из нарезанных яблок заливается или аккуратно перемешивается с бисквитным тестом."
+//                         time = "60 минут"
+//                     />
+//                 </div>
+//             </section>
+
+//         </main>
+//     );
+// }

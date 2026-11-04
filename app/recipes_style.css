@@ -1,0 +1,98 @@
+/* Контейнер сетки */
+.recipes-grid {
+    display: grid;
+    /* Ровно 3 колонки */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    /* Центрируем всю сетку на экране и ограничиваем максимальную ширину */
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    /* Центрируем сами карточки внутри ячеек сетки */
+    justify-items: center;
+  }
+  
+  /* Карточка */
+  .recipe-card {
+    width: 100%;
+    max-width: 350px; /* Чтобы карточки не были слишком широкими */
+    height: 100%; /* Растягиваем на всю высоту ячейки */
+    display: flex;
+    flex-direction: column;
+    background-color: #a5231c;
+    color: #faf1db;
+    border-radius: 12px;
+    overflow: hidden; /* Чтобы картинка не вылезала за скругленные углы */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Обертка для картинки */
+  .recipe-image-wrapper {
+    position: relative; /* Обязательно для next/image с fill */
+    width: 100%;
+    height: 220px; /* Фиксированная высота картинки */
+    overflow: hidden;
+    display: block; /* Для ссылки */
+  }
+  
+  /* Сама картинка */
+  .recipe-image {
+    object-fit: cover; /* Вписывает картинку, обрезая лишнее по краям (без искажений) */
+  }
+  
+  /* Внутренний контент карточки (чтобы кнопка прижималась к низу) */
+  .recipe-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Растягивает контент */
+  }
+  
+  .recipe-content h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+  }
+  
+  .recipe-desc {
+    margin: 0;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    flex-grow: 1; /* Толкает кнопку вниз, если описания разной длины */
+    /* Опционально: обрезка текста, если он слишком длинный */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .recipe-meta {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+  }
+  
+  .recipe-meta p {
+    margin: 0 0 5px 0;
+  }
+  
+  .recipe-meta span {
+    font-weight: bold;
+  }
+  
+  /* Кнопка "Подробнее" */
+  .recipe-btn {
+    display: inline-block;
+    margin-top: auto; /* Прижимает кнопку к самому низу */
+    padding: 10px 15px;
+    background-color: #faf1db;
+    color: #a5231c !important;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+  }
+  
+  .recipe-btn:hover {
+    background-color: #ffffff;
+  }

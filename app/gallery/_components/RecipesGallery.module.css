@@ -1,0 +1,54 @@
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 250px), 1fr)
+    );
+    gap: 24px;
+    margin: 24px 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #dedede;
+    border-radius: 12px;
+    background: white;
+    color: #222;
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 10%);
+}
+
+.card:focus-visible {
+    outline: 3px solid #930d0d;
+    outline-offset: 4px;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cardTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.description {
+    color: #555;
+    line-height: 1.5;
+}
